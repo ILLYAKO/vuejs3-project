@@ -30,4 +30,13 @@ https://cli.vuejs.org/
 *** Check Lint errors
 `npm run lint`
 
+3.0 Create App.vue
+3.1 template
+3.2 script
+3.3 style
+
+4.0 Debugging (17:45) 
+4.1 Add plugin Vue.js devtools to Chrome
+
+
 
