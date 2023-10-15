@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <!-- <div></div>
   <button v-on:click="addLike">Likes</button>
   <button @click="addDislike">DisLikes</button>
 
@@ -8,7 +8,7 @@
   </div>
   <div>
     Dislikes: <strong>{{ dislikes }}</strong>
-  </div>
+  </div> -->
 </template>
 <script>
 export default {

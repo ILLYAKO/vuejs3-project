@@ -38,5 +38,4 @@ https://cli.vuejs.org/
 4.0 Debugging (17:45) 
 4.1 Add plugin Vue.js devtools to Chrome
 
-
-
+5. New App (19:07)
