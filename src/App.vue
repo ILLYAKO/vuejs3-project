@@ -18,10 +18,6 @@
       />
       <button class="btn" @click="createPost">Create</button>
     </form>
-    <div class="post" v-for="post in posts" :key="post.id">
-      <div><strong>Name:</strong>{{ post.title }}</div>
-      <div><strong>Description:</strong> {{ post.title }}</div>
-    </div>
   </div>
 </template>
 <script>
