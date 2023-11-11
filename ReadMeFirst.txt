@@ -23,7 +23,7 @@ https://cli.vuejs.org/
 2.1. Create file src/App.vue with 3 section: template, script, and style
 2.2. Import App component into main.js
 
-*** Fixxing  Lint error
+*** Fixing  Lint error
 *** Open Your project: cd your-project-name
 *** Run comment to fix errors
 `npm run lint --fix`
