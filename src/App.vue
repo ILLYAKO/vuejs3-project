@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <h1>Page of Posts</h1>
+    <my-input v-model="searchQuery" placeholder="Search..." />
     <div class="app__btns">
       <my-button @click="showDialog">Create Post</my-button>
       <my-select v-model="selectedSort" :options="sortOptions" />
@@ -9,7 +10,11 @@
     <my-dialog v-model:show="dialogVisible">
       <post-form @create="createPost"
     /></my-dialog>
-    <post-list :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
+    <post-list
+      :posts="sortedAndSearchedPosts"
+      @remove="removePost"
+      v-if="!isPostsLoading"
+    />
     <div v-else>Loading...</div>
   </div>
 </template>
@@ -29,6 +34,7 @@ export default {
       modificatorValue: "",
       isPostsLoading: false,
       selectedSort: "",
+      searchQuery: "",
       sortOptions: [
         { value: "title", name: "Name" },
         { value: "body", name: "Description" },
@@ -50,7 +56,7 @@ export default {
       try {
         this.isPostsLoading = true;
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+          "https://jsonplaceholder.typicode.com/posts?_limit=5"
         );
         this.posts = response.data;
         this.isPostsLoading = false;
@@ -64,13 +70,27 @@ export default {
   mounted() {
     this.fetchPosts();
   },
-  watch: {
-    selectedSort(newValue) {
-      this.posts.sort((post1, post2) => {
-        return post1[newValue]?.localeCompare(post2[newValue]);
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
+        return post1[this.selectedSort]?.localeCompare(
+          post2[this.selectedSort]
+        );
       });
     },
+    sortedAndSearchedPosts() {
+      return this.sortedPosts.filter((post) =>
+        post.title.toLowerCase().includes(this.searchedQuery.toLowerCase())
+      );
+    },
   },
+  // watch: {
+  //   selectedSort(newValue) {
+  //     this.posts.sort((post1, post2) => {
+  //       return post1[newValue]?.localeCompare(post2[newValue]);
+  //     });
+  //   },
+  // },
 };
 </script>
 <style>

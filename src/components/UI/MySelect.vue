@@ -1,7 +1,7 @@
-<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <div>
-    <select v-model="modelValue" @change="changeOption">
+    <select :value="modelValue" @change="changeOption">
+      <!-- v-bind v-model :value -->
       <option disabled value="">Take from the list</option>
       <option
         v-for="option in options"
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     changeOption(event) {
-      this.$emit("update: modelValue", event.target.value);
+      this.$emit("update:modelValue", event.target.value);
     },
   },
 };
