@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <h1>Page of Posts</h1>
-    <my-input v-model="searchQuery" placeholder="Search..." />
+    <my-input v-model="searchedQuery" placeholder="Name Search..." />
     <div class="app__btns">
       <my-button @click="showDialog">Create Post</my-button>
       <my-select v-model="selectedSort" :options="sortOptions" />
@@ -16,6 +16,17 @@
       v-if="!isPostsLoading"
     />
     <div v-else>Loading...</div>
+    <div class="page__wrapper">
+      <div
+        v-for="pageNumber in totalPages"
+        v-bind:key="pageNumber"
+        class="page"
+        :class="{ 'current-page': page === pageNumber }"
+        @click="changePage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -33,8 +44,11 @@ export default {
       dialogVisible: false,
       modificatorValue: "",
       isPostsLoading: false,
+      page: 1,
+      limit: 5,
+      totalPages: 0,
       selectedSort: "",
-      searchQuery: "",
+      searchedQuery: "",
       sortOptions: [
         { value: "title", name: "Name" },
         { value: "body", name: "Description" },
@@ -56,7 +70,13 @@ export default {
       try {
         this.isPostsLoading = true;
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=5"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: { _page: this.page, _limit: this.limit },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
         this.isPostsLoading = false;
@@ -65,6 +85,10 @@ export default {
       } finally {
         this.isPostsLoading = false;
       }
+    },
+    changePage(pageNumber) {
+      this.page = pageNumber;
+      // this.fetchPosts();
     },
   },
   mounted() {
@@ -84,13 +108,11 @@ export default {
       );
     },
   },
-  // watch: {
-  //   selectedSort(newValue) {
-  //     this.posts.sort((post1, post2) => {
-  //       return post1[newValue]?.localeCompare(post2[newValue]);
-  //     });
-  //   },
-  // },
+  watch: {
+    page() {
+      this.fetchPosts();
+    },
+  },
 };
 </script>
 <style>
@@ -106,6 +128,17 @@ export default {
   margin: 15px 0;
   display: flex;
   justify-content: space-between;
+}
+.page__wrapper {
+  display: flex;
+  margin-top: 15px;
+}
+.page {
+  border: 1px solid black;
+  padding: 10px;
+}
+.current-page {
+  border: 2px solid teal;
 }
 </style>
 <!-- Single file component. -->
