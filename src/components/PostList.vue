@@ -8,6 +8,7 @@
       @remove="$emit('remove', post)"
     />
   </div>
+  <h2 v-else style="color: red">Empty list.</h2>
 </template>
 
 <script>

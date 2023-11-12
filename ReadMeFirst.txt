@@ -39,4 +39,8 @@ https://cli.vuejs.org/
 4.1 Add plugin Vue.js devtools to Chrome
 
 5. New App (19:07)
-50:23
+
+https://jsonplaceholder.typicode.com/
+
+`npm install axios`
+1:37:12
