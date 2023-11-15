@@ -31,6 +31,7 @@
     </div> -->
   </div>
 </template>
+
 <script>
 import PostForm from "@/components/PostForm.vue";
 import PostList from "@/components/PostList.vue";
@@ -44,7 +45,7 @@ export default {
     return {
       posts: [],
       dialogVisible: false,
-      modificatorValue: "",
+      // modificatorValue: "",
       isPostsLoading: false,
       page: 1,
       limit: 10,
@@ -74,7 +75,7 @@ export default {
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/posts",
           {
-            params: { _page: 0, _limit: this.limit },
+            params: { _page: this.page, _limit: this.limit },
           }
         );
         this.totalPages = Math.ceil(

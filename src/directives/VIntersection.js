@@ -1,7 +1,7 @@
 export default {
   name: "intersection",
   mounted(element, binding) {
-    console.log(element, binding);
+    // console.log(element, binding);
     // console.log(this.$refs.observer);
     const options = {
       root: document.querySelector("#scrollArea"),

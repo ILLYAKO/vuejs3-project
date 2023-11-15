@@ -43,4 +43,5 @@ https://cli.vuejs.org/
 https://jsonplaceholder.typicode.com/
 
 `npm install axios`
-2:06:00
+2:23:00
+vuex
