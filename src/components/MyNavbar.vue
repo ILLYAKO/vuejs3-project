@@ -7,6 +7,7 @@
       <my-button @click="$router.push('/storage')"
         >Posts With Storage</my-button
       >
+      <my-button @click="$router.push('/composition')">Composition</my-button>
     </div>
   </div>
 </template>

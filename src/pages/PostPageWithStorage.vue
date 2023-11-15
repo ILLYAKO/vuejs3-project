@@ -1,15 +1,19 @@
 <template>
   <div>
-    <h1>Page of Posts</h1>
+    <h1>Posts Page with Storage</h1>
     <my-input
-      :model-value="setSearchQuery"
+      :model-value="searchQuery"
       @update:model-value="setSearchQuery"
       placeholder="Name Search..."
       v-focus
     />
     <div class="app__btns">
       <my-button @click="showDialog">Create Post</my-button>
-      <my-select v-model="selectedSort" :options="sortOptions" />
+      <my-select
+        :model-value="selectedSort"
+        @update:model-value="setSelectedSort"
+        :options="sortOptions"
+      />
     </div>
 
     <my-dialog v-model:show="dialogVisible">
@@ -59,6 +63,7 @@ export default {
     ...mapMutations({
       setPage: "post/setPage",
       setSearchQuery: "post/setSearchQuery",
+      setSelectedSort: "post/setSelectedSort",
     }),
     createPost(post) {
       this.posts.push(post);
@@ -82,7 +87,7 @@ export default {
       limit: (state) => state.post.limit,
       totalPages: (state) => state.post.totalPages,
       selectedSort: (state) => state.post.selectedSort,
-      searchedQuery: (state) => state.post.searchedQuery,
+      searchQuery: (state) => state.post.searchQuery,
       sortOptions: (state) => state.post.sortOptions,
     }),
     ...mapGetters({
